@@ -48,8 +48,16 @@
          if(empty($conformPass)){
             $conformPassErr = "Conform Password is Requierd";
          }
+
          if(empty($emailAddress)){
             $emailAddressErr = "Email Address is Requierd";
+         }
+         if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+            $emailAddressErr = "Invalid email format";
+         }
+
+         if (!preg_match("/^[a-zA-Z-' ]*$/",$emailAddress)) {
+             $emailAddressErr = "Only letters and white space allowed";
          }
          if(empty($address)){
             $addressErr = "address  is Requierd";
@@ -73,7 +81,6 @@
             $checkboxErr = "checkbox is Requierd";
          }
          
-
       }
    
    
@@ -123,7 +130,7 @@
                <div class="col-md-4">
                   <label for="inputState" class="form-label">State</label>
                   <select id="inputState" class="form-select" name="state">
-                     <option selected>Choose...</option>
+                     <option >Choose...</option>
                      <option value="Dhaka">Dhaka</option>
                      <option value="Barishal">Barishal</option>
                      <option value="Chattogram">Chattogram</option>
@@ -143,19 +150,19 @@
                <div class="col-12 mb-3 ">
                 <p>Gender :</p>
                   <div class="form-check">
-                     <input class="form-check-input" type="radio" name="gender" id="mail" value="mail" checked>
-                     <label class="form-check-label" for="mail" value="mail">
+                     <input class="form-check-input" type="radio" name="gender" id="mail" value="mail" <?php if(isset($gender) && $gender == 'mail') echo "checked" ?>>
+                     <label class="form-check-label" for="mail">
                      mail
                      </label>
                   </div>
                   <div class="form-check">
-                     <input class="form-check-input" type="radio" name="gender" id="femail" value="femail">
+                     <input class="form-check-input" type="radio" name="gender" id="femail" value="femail" <?php if(isset($gender) && $gender == 'femail') echo "checked" ?>>
                      <label class="form-check-label" for="femail">
                      femail
                      </label>
                   </div>
                   <div class="form-check">
-                     <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                     <input class="form-check-input" type="radio" name="gender" id="other" value="Other" <?php if(isset($gender) && $gender == 'Other') echo "checked" ?>>
                      <label class="form-check-label" for="other">
                      Other
                      </label>
