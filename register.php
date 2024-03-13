@@ -51,23 +51,28 @@
 
          if(empty($emailAddress)){
             $emailAddressErr = "Email Address is Requierd";
-         }
-         if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+         }elseif(!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)){
             $emailAddressErr = "Invalid email format";
+         }elseif(!preg_match("/^[a-zA-Z-' ]*$/",$emailAddress)){
+            $emailAddressErr = "Only letters and white space allowed";
          }
 
-         if (!preg_match("/^[a-zA-Z-' ]*$/",$emailAddress)) {
-             $emailAddressErr = "Only letters and white space allowed";
-         }
          if(empty($address)){
             $addressErr = "address  is Requierd";
          }
          if(empty($city)){
             $cityErr = "city is Requierd";
          }
+
          if(empty($state)){
             $stateErr = "state is Requierd";
+         }elseif ($state === "") {
+           $stateErr = "Please select an option";
+         }else{
+           $stateErr =  "You selected: " . $state;
          }
+
+
          if(empty($gender)){
             $genderErr = "gender is Requierd";
          }
@@ -130,7 +135,7 @@
                <div class="col-md-4">
                   <label for="inputState" class="form-label">State</label>
                   <select id="inputState" class="form-select" name="state">
-                     <option >Choose...</option>
+                     <option value="" >Choose...</option>
                      <option value="Dhaka">Dhaka</option>
                      <option value="Barishal">Barishal</option>
                      <option value="Chattogram">Chattogram</option>
