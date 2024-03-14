@@ -18,6 +18,16 @@
     <!-- ======================  From Php ============================= -->
     <?php
    
+   // Database Connect
+   $conn = mysqli_connect('localhost','root','','mass_manager');
+    if($conn->connect_error){
+        echo $conn->connect_error;
+    }else{
+        echo "";
+    }
+
+
+
       //Defult Valu
       $firstName = $lastName = $password = $conformPass =$emailAddress = $address = $city =$state =$zip =  $gender = $photo =$checkbox = "";
       // Erroe Variable
@@ -116,6 +126,12 @@
             $checkboxSucc = "Data Successfully Sent";
          }
          
+
+
+         $insert = mysqli_query($conn , "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
+            VALUES ('$firstName', '$lastName','$password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')");
+
+
       }
    
    
@@ -252,7 +268,6 @@
                     <th scope="col">firstName</th>
                     <th scope="col">lastName</th>
                     <th scope="col">password</th>
-                    <th scope="col">conformPass</th>
                     <th scope="col">emailAddress</th>
                     <th scope="col">address</th>
                     <th scope="col">City</th>
@@ -264,6 +279,35 @@
                 </tr>
             </thead>
             <tbody>
+
+              <?php 
+
+                  $gets = mysqli_query( $conn, "SELECT * FROM register" );
+                  $count = mysqli_num_rows($gets);
+
+
+                  if($count > 0){
+                     while($rows = mysqli_fetch_assoc($gets)){
+                  ?>
+                                        
+                     <tr>
+                     <td><?php echo $rows['firstName'] ;?></td>
+                     <td><?php echo $rows['lastName'] ;?></td>
+                     <td><?php echo $rows['password'] ;?></td>
+                     <td><?php echo $rows['emailAddress'] ;?></td>
+                     <td><?php echo $rows['address'] ;?></td>
+                     <td><?php echo $rows['city'] ;?></td>
+                     <td><?php echo $rows['state'] ;?></td>
+                     <td><?php echo $rows['zip'] ;?></td>
+                     <td><?php echo $rows['gender'] ;?></td>
+                     <td><?php echo $rows['photo'] ;?></td>
+                     <td><?php echo $rows['checkbox'] ;?></td>
+                  </tr>
+                  <?php
+                     }
+                  }
+              ?>
+
                 <tr class="">
                     <td scope="row"><?php echo $firstName?></td>
                     <td><?php echo $lastName ?></td>
@@ -281,6 +325,10 @@
                 
             </tbody>
         </table>
+
+
+
+
         </div>
 
 
