@@ -122,7 +122,10 @@
 
          if(empty($checkbox)){
             $checkboxErr = "checkbox is Requierd";
-         }else{
+         }elseif ($checkbox === "checked") {
+            echo "1";
+         }
+         else{
             $checkboxSucc = "Data Successfully Sent";
          }
          
@@ -143,13 +146,13 @@
             <div class="row">
                <div class="col-md-6">
                   <label for="firstName" class="form-label">First Name <span class="error">*</span></label>
-                  <input type="text" name="firstName" class="form-control" id="firstName">
+                  <input type="text" name="firstName" class="form-control" id="firstName" value="<?php echo $firstName ?>">
                   <span class="error"><?php echo $firstNameErr;?></span>
                   <span class="success"> <?php echo $firstNameSucc;?></span>
                </div>
                <div class="col-md-6">
                   <label for="lastName" class="form-label">Last Name <span class="error">*</span></label>
-                  <input type="text" name="lastName" class="form-control" id="lastName">
+                  <input type="text" name="lastName" class="form-control" id="lastName" value="<?php echo $lastName ?>">
                   <span class="error"> <?php echo $lastNameErr;?></span>
                   <span class="success"> <?php echo $lastNameSucc;?></span>
                </div>
@@ -157,31 +160,31 @@
             <div class="row g-3 pt-3 ">
                <div class="col-md-6">
                   <label for="password" class="form-label">Password <span class="error">*</span></label>
-                  <input type="password" name="password" class="form-control" id="Password">
+                  <input type="password" name="password" class="form-control" id="Password" value="<?php echo $password ;?>">
                   <span class="error"> <?php echo $passwordErr;?></span>
                   <span class="success"> <?php echo $passwordSucc;?></span>
                </div>
                <div class="col-md-6">
                   <label for="conformPass" class="form-label">Conform Password <span class="error">*</span></label>
-                  <input type="password" name="conformPass" class="form-control" id="conformPass">
+                  <input type="password" name="conformPass" class="form-control" id="conformPass" value="<?php echo $conformPass ;?>">
                   <span class="error"> <?php echo $conformPassErr;?></span>
                   <span class="success"> <?php echo $conformPassSucc;?></span>
                </div>
                <div class="col-12">
                   <label for="emailAddress" class="form-label">Email <span class="error">*</span></label>
-                  <input type="email" name="emailAddress" class="form-control" id="emailAddress" placeholder="Your Email">
+                  <input type="email" name="emailAddress" class="form-control" id="emailAddress" placeholder="Your Email" value="<?php echo $emailAddress ;?>">
                   <span class="error"> <?php echo $emailAddressErr;?></span>
                   <span class="success"> <?php echo $emailAddressSucc;?></span>
                </div>
                <div class="col-12">
                   <label for="address" class="form-label">Address <span class="error">*</span></label>
-                  <input type="text" name="address" class="form-control" id="address" placeholder="Your Address">
+                  <input type="text" name="address" class="form-control" id="address" placeholder="Your Address" >
                   <span class="error"><?php echo $addressErr;?></span>
                   <span class="success"> <?php echo $addressSucc;?></span>
                </div>
                <div class="col-md-6">
                   <label for="inputCity" class="form-label">City <span class="error">*</span></label>
-                  <input type="text" name="city" class="form-control" id="inputCity">
+                  <input type="text" name="city" class="form-control" id="inputCity" value="<?php echo $city ;?>">
                   <span class="error"> <?php echo $cityErr;?></span>
                   <span class="success"> <?php echo $citySucc;?></span>
                </div>
@@ -203,7 +206,7 @@
                </div>
                <div class="col-md-2">
                   <label for="inputZip" class="form-label">Zip <span class="error">*</span></label>
-                  <input type="number" name="zip" class="form-control" id="inputZip">
+                  <input type="number" name="zip" class="form-control" id="inputZip" value="<?php echo $zip ?>">
                   <span class="error"> <?php echo $zipErr;?></span>
                   <span class="success"> <?php echo $zipSucc;?></span>
                </div>
@@ -240,10 +243,13 @@
                </div>
                <div class="col-12">
                   <div class="form-check">
-                     <input class="form-check-input" name="checkbox" type="checkbox" id="gridCheck" >
+                     <!-- <input class="form-check-input" name="checkbox" type="checkbox" id="gridCheck"> -->
+
                      <label class="form-check-label" for="gridCheck">
+                     <input type="checkbox" name="checkbox" id="gridCheck">
                      Check me <span class="error">*</span>  
                      </label>
+                     
                      <span class="error"> <?php echo $checkboxErr;?></span>
                      <span class="success"> <?php echo $checkboxSucc;?></span>
                   </div>
@@ -256,78 +262,6 @@
             
          </div>
       </form>
-
-
-      <!-- =================== Table ================== -->
-
-      
-        <div class="container">
-            <table class="table table-primary ">
-            <thead>
-                <tr>
-                    <th scope="col">firstName</th>
-                    <th scope="col">lastName</th>
-                    <th scope="col">password</th>
-                    <th scope="col">emailAddress</th>
-                    <th scope="col">address</th>
-                    <th scope="col">City</th>
-                    <th scope="col">state</th>
-                    <th scope="col">zip</th>
-                    <th scope="col">gender</th>
-                    <th scope="col">photo</th>
-                    <th scope="col">checkbox</th>
-                </tr>
-            </thead>
-            <tbody>
-
-              <?php 
-
-                  $gets = mysqli_query( $conn, "SELECT * FROM register" );
-                  $count = mysqli_num_rows($gets);
-
-
-                  if($count > 0){
-                     while($rows = mysqli_fetch_assoc($gets)){
-                  ?>
-                                        
-                     <tr>
-                     <td><?php echo $rows['firstName'] ;?></td>
-                     <td><?php echo $rows['lastName'] ;?></td>
-                     <td><?php echo $rows['password'] ;?></td>
-                     <td><?php echo $rows['emailAddress'] ;?></td>
-                     <td><?php echo $rows['address'] ;?></td>
-                     <td><?php echo $rows['city'] ;?></td>
-                     <td><?php echo $rows['state'] ;?></td>
-                     <td><?php echo $rows['zip'] ;?></td>
-                     <td><?php echo $rows['gender'] ;?></td>
-                     <td><?php echo $rows['photo'] ;?></td>
-                     <td><?php echo $rows['checkbox'] ;?></td>
-                  </tr>
-                  <?php
-                     }
-                  }
-              ?>
-
-                <tr class="">
-                    <td scope="row"><?php echo $firstName?></td>
-                    <td><?php echo $lastName ?></td>
-                    <td><?php echo $password ?></td>
-                    <td><?php echo $conformPass ?></td>
-                    <td><?php echo $emailAddress ?></td>
-                    <td><?php echo $address ?></td>
-                    <td><?php echo $city ?></td>
-                    <td><?php echo $state ?></td>
-                    <td><?php echo $zip ?></td>
-                    <td><?php echo $gender ?></td>
-                    <td><?php echo $photo ?></td>
-                    <td><?php echo $checkbox ?></td>
-                </tr>
-                
-            </tbody>
-        </table>
-
-
-
 
         </div>
 
