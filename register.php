@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Bootstrap demo</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 
       <style>
          .error{color: #FF0000;}
@@ -50,6 +50,8 @@
          $photo = $_POST['photo'];
          $checkbox = $_POST['checkbox'];
 
+         // Md5 Password Convert
+         $md5_Password = md5($password);
 
          if(empty($firstName)){
             $firstNameErr = "Name is Requierd";
@@ -74,6 +76,9 @@
             $conformPassSucc = "Data Successfully Sent";
          }
 
+
+
+
          if(empty($emailAddress)){
             $emailAddressErr = "Email Address is Requierd";
          }elseif(!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)){
@@ -95,7 +100,7 @@
             $citySucc = "Data Successfully Sent";
          }
 
-         if(empty($state == "")){
+         if(empty($state === "")){
             $stateErr = "state is Requierd";
          }else{
             $stateSucc = "Data Successfully Sent";
@@ -129,10 +134,29 @@
             $checkboxSucc = "Data Successfully Sent";
          }
          
+         //Empty chack and database data send
+
+         if(!empty($firstName) && !empty($lastName) && !empty($password) && !empty($emailAddress) && !empty($address) && !empty($city) && !empty($state)
+            && !empty($zip) && !empty($gender) && !empty($photo) && !empty($checkbox)){
+
+               if($password === $conformPass){
+                  $insert = mysqli_query($conn , "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
+                  VALUES ('$firstName', '$lastName','$md5_Password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')");
+
+                  if($conn -> query($insert) == TRUE){
+                     // echo "User Creat";
+                     header('location:login.php?userCreate');
+                  }else{
+                     echo "Input Problem";
+                  }
 
 
-         $insert = mysqli_query($conn , "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
-            VALUES ('$firstName', '$lastName','$password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')");
+            }else {
+                  $passNotMatch = "Password Not Match";
+               }
+         }
+
+         
 
 
       }
@@ -168,7 +192,16 @@
                   <label for="conformPass" class="form-label">Conform Password <span class="error">*</span></label>
                   <input type="password" name="conformPass" class="form-control" id="conformPass" value="<?php echo $conformPass ;?>">
                   <span class="error"> <?php echo $conformPassErr;?></span>
-                  <span class="success"> <?php echo $conformPassSucc;?></span>
+                
+                  <!-- <span class="error"> <?php echo $passNotMatch;?></span> -->
+                  <?php 
+                     // $passNotMatch = "";
+                     if ($password === $conformPass) {   ?>         
+                           <span class="success"> <?php echo $conformPassSucc; ?> </span>
+                  <?php   }else{ ?>
+                        <span class="error"> <?php echo $passNotMatch;?></span><?php
+                     }
+                  ?>
                </div>
                <div class="col-12">
                   <label for="emailAddress" class="form-label">Email <span class="error">*</span></label>
@@ -246,7 +279,7 @@
                      <!-- <input class="form-check-input" name="checkbox" type="checkbox" id="gridCheck"> -->
 
                      <label class="form-check-label" for="gridCheck">
-                     <input type="checkbox" name="checkbox" id="gridCheck">
+                     <input type="checkbox" name="checkbox" id="gridCheck" value="1">
                      Check me <span class="error">*</span>  
                      </label>
                      
@@ -256,6 +289,7 @@
                </div>
                <div class="col-12">
                   <button type="submit" name="dataSend" class="btn btn-primary">Sign in</button>
+                  <button type="button" class="btn btn-success"><a class="text-decoration-none text-white" href="login.php">Login</a></button>
                </div>
             </div>
 
@@ -267,6 +301,6 @@
 
 
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="./assets/js/bootstrap.bundle.min.js"></script>
    </body>
 </html>
