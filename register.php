@@ -143,7 +143,7 @@
                   $insert = mysqli_query($conn , "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
                   VALUES ('$firstName', '$lastName','$md5_Password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')");
 
-                  if($conn -> query($insert) == TRUE){
+                  if($insert == TRUE){
                      // echo "User Creat";
                      header('location:login.php?userCreate');
                   }else{
