@@ -1,22 +1,8 @@
 
 <?php 
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password);
-
-    // Check connection
-    if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-    }
-    echo "Connected successfully";
-
-
     // Database Connect
-//    $conn = mysqli_connect('localhost','root','','mass_manager');
+    $conn = mysqli_connect('localhost','root','','mass_manager');
     if($conn->connect_error){
         echo $conn->connect_error;
     }
@@ -37,21 +23,20 @@
         }
 
         if(!empty($userEmail) && !empty($userPassword)){
-            //$checkData = "SELECT * FROM register WHERE emailAddress = '$userEmail' AND password = '$userPassword'";
-            //$connectData =  $conn->query($checkData);
+            // $checkData = "SELECT * FROM register WHERE emailAddress = '$userEmail' AND password = '$md5_Password'";
+            // $connectData =  $conn->mysqli_query($checkData);
             
             $connectData =  mysqli_query($conn,"SELECT * FROM register WHERE emailAddress = '$userEmail' AND password = '$md5_Password'");
-            
-            var_dump($connectData); 
-            die();
+            $dataFace = mysqli_fetch_assoc($connectData);
+                    
+            // die();     
 
-            if($connectData == TRUE){
-                header('location:login.php');
-            }else{
-                echo 'Not found';
-                echo $connectData;
-                // header('location:login.php');
+            if ($dataFace == TRUE) {
+                header("location:profile.php");
+            }else {
+               $incorrect = "Your Data Is not incorrect";
             }
+
 
         }
 
@@ -97,11 +82,11 @@
                                     echo "user Create Success";
                                   }  
                             ?>
-                            <form action="login.php" method="POST">
+                            <form action="index.php" method="POST">
                                 <div class="card-body p-5 text-center">
                                 <div class="mb-md-5 ">
                                     <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                                    <p class="text-white-50 mb-2">Please enter your login and password!</p>
+                                    <p class="text-white-50 mb-2">Please enter your Email and password!</p>
 
                                     <div class="form-outline form-white mb-4">
                                         <input type="email" id="typeEmailX" name="userEmail" value="<?php echo $userEmail ;?>"  class="form-control form-control-lg" />

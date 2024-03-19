@@ -100,7 +100,7 @@
             $citySucc = "Data Successfully Sent";
          }
 
-         if(empty($state === "")){
+         if(empty($state === " ")){
             $stateErr = "state is Requierd";
          }else{
             $stateSucc = "Data Successfully Sent";
@@ -140,12 +140,14 @@
             && !empty($zip) && !empty($gender) && !empty($photo) && !empty($checkbox)){
 
                if($password === $conformPass){
-                  $insert = mysqli_query($conn , "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
-                  VALUES ('$firstName', '$lastName','$md5_Password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')");
+                  // $insert = mysqli_query($conn , "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
+                  // VALUES ('$firstName', '$lastName','$md5_Password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')");
 
-                  if($insert == TRUE){
-                     // echo "User Creat";
-                     header('location:login.php?userCreate');
+                  $insert = "INSERT INTO register(firstName, lastName,password,emailAddress,address,city,state,zip,gender,photo,checkbox)
+                  VALUES ('$firstName', '$lastName','$md5_Password','$emailAddress','$address','$city','$state','$zip','$gender','$photo','$checkbox')";
+
+                  if($conn->query($insert) == TRUE){
+                     header('location:index.php?userCreate'); //userCreate = supper grobal get variable 
                   }else{
                      echo "Input Problem";
                   }
