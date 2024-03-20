@@ -1,12 +1,14 @@
 
 <?php 
 
+    session_start();
+
     // Database Connect
     $conn = mysqli_connect('localhost','root','','mass_manager');
     if($conn->connect_error){
         echo $conn->connect_error;
     }
-
+    $incorrect = "";
     $emptyEmail = $emptyPassword = "";
     $userEmail = $userPassword = "";
 
@@ -30,8 +32,9 @@
             $dataFace = mysqli_fetch_assoc($connectData);
                     
             // die();     
-
+            
             if ($dataFace == TRUE) {
+                $_SESSION['login']= 'Login success';
                 header("location:profile.php");
             }else {
                $incorrect = "Your Data Is not incorrect";
@@ -99,7 +102,7 @@
                                         <label class="form-label" for="typePasswordX">Password </label>
                                         <span class="error"><?php echo $emptyPassword;?></span>
                                     </div>
-
+                                  <span class="error"><?php echo $incorrect;?></span>
                                     <p class="small mb-3 "><a class="text-white-50" href="#!">Forgot password?</a></p>
 
                                     <button class="btn btn-outline-light btn-lg px-5" name="logInSubmit" type="submit">Login</button>

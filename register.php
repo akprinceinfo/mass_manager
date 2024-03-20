@@ -29,7 +29,7 @@
 
 
       //Defult Valu
-      $firstName = $lastName = $password = $conformPass =$emailAddress = $address = $city =$state =$zip =  $gender = $photo =$checkbox = "";
+      $firstName = $lastName = $password = $conformPass = $emailAddress = $address = $city = $gender  = $zip =  $photo = $checkbox = "";
       // Erroe Variable
        $firstNameErr =  $lastNameErr =  $passwordErr =  $conformPassErr = $emailAddressErr = $addressErr = $cityErr = $stateErr = $zipErr = $genderErr = $photoErr = $checkboxErr ="";
 
@@ -49,9 +49,11 @@
          $gender = $_POST['gender'];
          $photo = $_POST['photo'];
          $checkbox = $_POST['checkbox'];
-
          // Md5 Password Convert
          $md5_Password = md5($password);
+
+         
+
 
          if(empty($firstName)){
             $firstNameErr = "Name is Requierd";
