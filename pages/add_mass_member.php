@@ -30,7 +30,7 @@
 
 
         if (!empty($name) && !empty($emailAddress) && !empty($phoneNumber) && !empty($memberRoll)) {
-           $insert = "INSERT INTO massmember(MemberName,Email,Phone,MemberRoleId) VALUES ('$name', '$emailAddress','$phoneNumber','$memberRoll')";
+           $insert = "INSERT INTO  (MemberName,Email,Phone,MemberRoleId) VALUES ('$name', '$emailAddress','$phoneNumber','$memberRoll')";
            
             if($conn->query($insert) == TRUE){
                      echo "Data Pass";

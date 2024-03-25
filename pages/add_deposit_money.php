@@ -68,7 +68,7 @@
                      <input type="date" name="date" class="form-control" id="date" value="">
                      <span class="error"><?php echo $emptyDate ;?></span>
                   </div>
-                  <div class="col-12">
+                  <div class="col-md-12">
                      <label for="Deposit_Amount" class="form-label">Deposit Amount <span class="error">*</span></label>
                      <input type="number" name="Deposit_Amount" class="form-control" id="Deposit_Amount" placeholder="Deposit Amount" value="">
                     <span class="error"><?php  ;?></span>
