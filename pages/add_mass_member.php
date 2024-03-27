@@ -65,7 +65,7 @@
          <!-- ======================  From  ============================= -->
          <form action="" method="POST">
             <div class='container py-5'>
-               <h2 class="text-center pb-3">Mass Member</h2>
+               <h2 class="text-center pb-3">Add Mass Member</h2>
                <div class="row g-3 ">
                   <div class="col-md-12">
                      <label for="name" class="form-label">Your Name <span class="error">*</span></label>
