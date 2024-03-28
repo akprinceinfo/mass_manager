@@ -10,6 +10,13 @@
 
 
     if(isset($_POST['addMarketCost'])){
+
+        $marketCostRoll = $_POST['marketCostRoll'];
+        $date = $_POST['date'];
+        $Market_Cost_Amount = $_POST['Market_Cost_Amount'];
+        $BazerDetails = $_POST['BazerDetails'];
+        $Select_Shoppers = $_POST['Select_Shoppers'];
+
         if (empty($marketCostRoll)) {
             $emptyMarketCostRoll = "Please Input Your Market Cost Roll";
         }
@@ -23,6 +30,17 @@
             $emptySelect_Shoppers = "Please Input Your Select Shoppers";
         }
 
+
+
+        if (!empty($marketCostRoll) && !empty($date) && !empty($Market_Cost_Amount) && !empty($Select_Shoppers)) {
+           $insert = "INSERT INTO add_market_cost(Market_Cost,Date,Market_Cost_Amount,Bazer_Details,Select_Shoppers) VALUES ('$marketCostRoll', '$date','$Market_Cost_Amount','$BazerDetails','$Select_Shoppers')";
+           
+            if($conn->query($insert) == TRUE){
+                     echo "Add Market Cost Data Pass";
+                  }else{
+                     echo "Input Problem";
+                  }
+        }
 
     };
   
@@ -98,9 +116,8 @@
                        <span class="error"><?php echo $emptySelect_Shoppers ;?></span>
                     <?php
                         }
-                    ?>
-                       
-                    </div>
+                    ?>    
+                </div>
                </div>
 
                <div class="col-md-12 pt-5 ">
