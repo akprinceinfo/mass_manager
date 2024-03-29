@@ -35,14 +35,7 @@
                   }
         }
 
-
-
     }
-
-    
-
-
-
 
 ?>
 
@@ -55,10 +48,11 @@
       <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
       <style>
-         .error{color: #FF0000;}
-         .success{color:green;}
-         .start{display:none}
-      </style>
+        .error{color: #FF0000;}
+            .highlight {
+                display:none;
+            }
+    </style>
 
    </head>
    <body>
@@ -70,10 +64,10 @@
                <h2 class="text-center pb-3">Add Meal</h2>
                <div class="row g-3 ">
                     <div class="col-md-12">
-                        <label for="inputState" class="form-label">Select For Member<span class="error">*</span></label>
+                        <label for="inputState" class="form-label">Select For Member <span class="error">*</span></label>
                         <select id="inputState" class="form-select" name="Select_For_Member">
-                            <option value="allMember">For all Member</option>
-                            <option value="SingleMember">For Single Member</option>
+                            <option value="0">For all Member</option>
+                            <option value="1">For Single Member</option>
                         </select>
                         <span class="error"><?php echo $emptySelect_For_Member; ?></span>
                     </div>
@@ -115,8 +109,13 @@
                     </div>
                   </div>   
                   
-                  
-                  
+                    <select id="mySelect">
+                    <option value="option1">Option 1</option>
+                    <option value="option2" >Option 2 (Disabled)</option>
+                    <option value="option3">Option 3</option>
+                    </select>
+
+                   
                </div>
 
                <div class="col-md-12 pt-5 ">
@@ -129,5 +128,6 @@
       </form>
       </div>
       <script src="../assets/js/bootstrap.bundle.min.js"></script>
+      <script src="../assets/js/app.js"></script>
    </body>
 </html>
