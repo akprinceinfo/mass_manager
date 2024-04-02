@@ -1,32 +1,32 @@
 <?php 
 
-     $conn = mysqli_connect('localhost','root','','mass_manager');
+    $conn = mysqli_connect('localhost','root','','mass_manager');
     if($conn->connect_error){
         echo $conn->connect_error;
     }
 
-    $Select_For_Member = $date = $Breakfast = $Lunch = $Dinner ="";
+    $Select_For_Member = $Date = $Breakfast = $Lunch = $Dinner ="";
     $emptySelect_For_Member = $emptyDate = "";
 
     if (isset($_POST['addMeal'])) {
        $Select_For_Member = $_POST['Select_For_Member'];
-       $date = $_POST['date'];
+       $Date = $_POST['date'];
        $Breakfast = $_POST['Breakfast'];
        $Lunch = $_POST['Lunch'];
        $Dinner = $_POST['Dinner'];
 
 
-       if(empty($Select_For_Member)){
+       if(empty($Select_For_Member && $Select_For_Member == "")){
             $emptySelect_For_Member = "Please Input Your Member Select";
         }
-      if(empty($date)){
+      if(empty($Date)){
             $emptyDate = "Please Input Your Date";
         }
 
 
 
-        if (!empty($Select_For_Member) && !empty($date) && !empty($Breakfast) && !empty($Lunch) && !empty($Dinner)) {
-           $insert = "INSERT INTO add_meal(Select_For_Member,Date,Breakfast,Lunch,Dinner) VALUES ('$Select_For_Member', '$date','$Breakfast','$Lunch','$Dinner')";
+        if (!empty($Select_For_Member) && !empty($Date) && !empty($Breakfast) && !empty($Lunch) && !empty($Dinner)) {
+           $insert = "INSERT INTO add_meal(Select_For_Member,Date,Breakfast,Lunch,Dinner) VALUES ('$Select_For_Member', '$Date','$Breakfast','$Lunch','$Dinner')";
            
             if($conn->query($insert) == TRUE){
                      echo "Mial Add";
@@ -56,7 +56,6 @@
 
    </head>
    <body>
-    <?php echo  $Select_For_Member; ?>
       <div class="container pt-5 ">
          <!-- ======================  From  ============================= -->
          <form action="" method="POST">
@@ -85,6 +84,8 @@
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
+                            <option value="2">2.5</option>
+                            <option value="2">3</option>
                         </select> 
                     </div>
                     <div class="col-md-4">
@@ -95,6 +96,8 @@
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
+                            <option value="2">2.5</option>
+                            <option value="2">3</option>
                         </select>      
                     </div>
                     <div class="col-md-4">
@@ -105,22 +108,24 @@
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
+                            <option value="2">2.5</option>
+                            <option value="2">3</option>
                         </select>      
                     </div>
                   </div>   
                   
-                    <select id="mySelect">
+                    <!-- <select id="mySelect">
                     <option value="option1">Option 1</option>
                     <option value="option2" >Option 2 (Disabled)</option>
                     <option value="option3">Option 3</option>
-                    </select>
+                    </select> -->
 
                    
                </div>
 
                <div class="col-md-12 pt-5 ">
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-danger btn-block" name="addMeal">Add Meal</button>
+                        <button type="submit" class="btn btn-danger baddMealtn-block" name="">Add Meal</button>
                     </div>
                </div>
             </div>

@@ -8,13 +8,6 @@
     $Select_For_Member = $date = $Breakfast = $Lunch = $Dinner ="";
     $emptySelect_For_Member = $emptyDate = "";
 
-   
-
-
-
-    
-
-
 
 
 ?>
@@ -43,8 +36,6 @@
                <h2 class="text-center pb-3">Member All Function</h2>
                <div class="row g-3 ">
                     <div class="col-md-12">
-                        
-                        
                        
                     </div>
                   <div class="col-md-12">
