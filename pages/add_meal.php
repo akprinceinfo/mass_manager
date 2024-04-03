@@ -16,10 +16,10 @@
        $Dinner = $_POST['Dinner'];
 
 
-       if(empty($Select_For_Member && $Select_For_Member == "")){
+       if(empty($Select_For_Member)){
             $emptySelect_For_Member = "Please Input Your Member Select";
         }
-      if(empty($Date)){
+       if(empty($Date)){
             $emptyDate = "Please Input Your Date";
         }
 
@@ -34,9 +34,11 @@
                      echo "Input Problem";
                   }
         }
-
+        
     }
 
+    // Close connection
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +67,8 @@
                     <div class="col-md-12">
                         <label for="inputState" class="form-label">Select For Member <span class="error">*</span></label>
                         <select id="inputState" class="form-select" name="Select_For_Member">
-                            <option value="0">For all Member</option>
+                            <option>Select Member</option>
+                            <option value="2">For all Member</option>
                             <option value="1">For Single Member</option>
                         </select>
                         <span class="error"><?php echo $emptySelect_For_Member; ?></span>
@@ -73,7 +76,7 @@
                   <div class="col-md-12">
                      <label for="date" class="form-label">Date <span class="error">*</span></label>
                      <input type="date" name="date" class="form-control" id="date" value="">
-                     <span class="error"><?php  echo $emptyDate;?></span>
+                     <span class="error"><?php echo $emptyDate;?></span>
                   </div>
                   <div class="row g-3 ">
                     <div class="col-md-4">
@@ -84,8 +87,8 @@
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
-                            <option value="2">2.5</option>
-                            <option value="2">3</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
                         </select> 
                     </div>
                     <div class="col-md-4">
@@ -96,8 +99,8 @@
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
-                            <option value="2">2.5</option>
-                            <option value="2">3</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
                         </select>      
                     </div>
                     <div class="col-md-4">
@@ -108,8 +111,8 @@
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
-                            <option value="2">2.5</option>
-                            <option value="2">3</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
                         </select>      
                     </div>
                   </div>   
@@ -125,7 +128,7 @@
 
                <div class="col-md-12 pt-5 ">
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-danger baddMealtn-block" name="">Add Meal</button>
+                        <button type="submit" class="btn btn-danger baddMealtn-block" name="addMeal">Add Meal</button>
                     </div>
                </div>
             </div>
@@ -133,6 +136,6 @@
       </form>
       </div>
       <script src="../assets/js/bootstrap.bundle.min.js"></script>
-      <script src="../assets/js/app.js"></script>
+      <!-- <script src="../assets/js/app.js"></script> -->
    </body>
 </html>
