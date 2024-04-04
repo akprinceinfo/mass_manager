@@ -110,14 +110,14 @@
                          <option value="<?php echo $rows['id'] ;?>"><?php echo $rows['MemberName'] ;?></option>
                          <?php
 
-                     }
-                     ?>
-                       </select>
-                       <span class="error"><?php echo $emptySelect_Shoppers ;?></span>
-                    <?php
                         }
-                    ?>    
-                </div>
+                        ?>
+                        </select>
+                        <span class="error"><?php echo $emptySelect_Shoppers ;?></span>
+                        <?php
+                            }
+                        ?>    
+                    </div>
                </div>
 
                <div class="col-md-12 pt-5 ">

@@ -5,8 +5,8 @@
         echo $conn->connect_error;
     }
 
-    $Select_For_Member = $Date = $Breakfast = $Lunch = $Dinner ="";
-    $emptySelect_For_Member = $emptyDate = "";
+    $Select_For_Member = $Date = $Breakfast = $Lunch = $Dinner = $Member_Name = "";
+    $emptySelect_For_Member = $emptyDate = $emptySelect_Shoppers = "" ;
 
     if (isset($_POST['addMeal'])) {
        $Select_For_Member = $_POST['Select_For_Member'];
@@ -14,7 +14,7 @@
        $Breakfast = $_POST['Breakfast'];
        $Lunch = $_POST['Lunch'];
        $Dinner = $_POST['Dinner'];
-
+       $Member_Name = $_POST['Member_Name'];
 
        if(empty($Select_For_Member)){
             $emptySelect_For_Member = "Please Input Your Member Select";
@@ -26,7 +26,7 @@
 
 
         if (!empty($Select_For_Member) && !empty($Date) && !empty($Breakfast) && !empty($Lunch) && !empty($Dinner)) {
-           $insert = "INSERT INTO add_meal(Select_For_Member,Date,Breakfast,Lunch,Dinner) VALUES ('$Select_For_Member', '$Date','$Breakfast','$Lunch','$Dinner')";
+           $insert = "INSERT INTO add_meal(Select_For_Member,Date,Breakfast,Lunch,Dinner ,Member_Name) VALUES ('$Select_For_Member', '$Date','$Breakfast','$Lunch','$Dinner','$Member_Name')";
            
             if($conn->query($insert) == TRUE){
                      echo "Mial Add";
@@ -37,8 +37,7 @@
         
     }
 
-    // Close connection
-    $conn->close();
+    
 ?>
 
 <!DOCTYPE html>
@@ -65,8 +64,8 @@
                <h2 class="text-center pb-3">Add Meal</h2>
                <div class="row g-3 ">
                     <div class="col-md-12">
-                        <label for="inputState" class="form-label">Select For Member <span class="error">*</span></label>
-                        <select id="inputState" class="form-select" name="Select_For_Member">
+                        <label for="Select_For_Member" class="form-label">Select For Member <span class="error">*</span></label>
+                        <select id="Select_For_Member" class="form-select" name="Select_For_Member" onchange="toggleOptions()">
                             <option>Select Member</option>
                             <option value="2">For all Member</option>
                             <option value="1">For Single Member</option>
@@ -116,13 +115,29 @@
                         </select>      
                     </div>
                   </div>   
-                  
-                    <!-- <select id="mySelect">
-                    <option value="option1">Option 1</option>
-                    <option value="option2" >Option 2 (Disabled)</option>
-                    <option value="option3">Option 3</option>
-                    </select> -->
+                
+                    <div class="col-md-12 ">
+                        <label for="inputState" class="form-label" id="SelectMassMembers">Select Mass Members<span class="error">*</span></label>
+                        <?php 
+                            $gets = mysqli_query($conn, "SELECT * FROM massmember");
+                            $count_row = mysqli_num_rows($gets);
+                        ?>
+                        <select id="mySelect" class="form-select" name="Member_Name">
+                        <?php
+                            if($count_row > 0){
+                            while($rows = mysqli_fetch_assoc($gets)){
+                        ?>
+                         <option value="<?php echo $rows['MemberName'] ;?>"><?php echo $rows['MemberName'] ;?></option>
+                         <?php
 
+                        }
+                        ?>
+                        </select>
+                        <span class="error"><?php echo $emptySelect_Shoppers ;?></span>
+                        <?php
+                            }
+                        ?>    
+                    </div>
                    
                </div>
 
@@ -136,6 +151,24 @@
       </form>
       </div>
       <script src="../assets/js/bootstrap.bundle.min.js"></script>
-      <!-- <script src="../assets/js/app.js"></script> -->
+      <script src="../assets/js/app.js"></script>
+      <script>
+        function toggleOptions() {
+            var inputState = document.getElementById("Select_For_Member");
+            var mySelect = document.getElementById("mySelect");
+            var SelectMassMembers = document.getElementById("SelectMassMembers");
+
+            if (Select_For_Member.value === "2") {
+                // mySelect.disabled = true;
+                mySelect.style.display = "none";
+                SelectMassMembers.style.display= "none";
+                
+            }  else if (Select_For_Member.value === "1") {
+                // mySelect.disabled = false;
+                mySelect.style.display = "block";
+                SelectMassMembers.style.display= "block";
+            }
+        }
+      </script>
    </body>
 </html>
