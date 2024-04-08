@@ -1,4 +1,12 @@
+<?php 
 
+    $conn = mysqli_connect('localhost','root','','mass_manager');
+    if ($conn -> connect_error) {
+        echo $conn->connect_error;
+    }
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,66 +30,36 @@
             <div class='container py-5'>
                <h2 class="text-center pb-3">All Members</h2>
                <div class="row g-3 ">
+                    <?php 
+                        $gets = mysqli_query($conn, "SELECT * FROM massmember");
+                        $count_row = mysqli_num_rows($gets);
+                    ?>
+                    <?php
+                            if($count_row > 0){
+                            while($rows = mysqli_fetch_assoc($gets)){
+                        ?>
                     <div class="col-md-4">
-                        <div class="card" style="">
+                        <div class="card d-flex " style="">
                             <img src="../assets/image/profile_image/profile_1.png" class="card-img-top" alt="...">
                             <div class="card-body d-flex flex-column ">
-                                <h5 class="card-title">Name :</h5>
-                                <h5 class="card-title">Email :</h5>
-                                <h5 class="card-title">Number :</h5>
-                                <a href="#" class="btn btn-primary mb-2 ">Manager</a>
+                                <h5 class="card-title">Name : <?php echo $rows['MemberName'] ;?></h5>
+                                <h5 class="card-title">Email :<?php echo $rows['Email'] ;?></h5>
+                                <h5 class="card-title">Number : <?php echo $rows['Phone'] ;?></h5>
+                                <a href="#" class="btn btn-primary mb-2 "><?php if ($rows['MemberRoleId'] == 1) {
+                                    echo "Manager";
+                                }elseif($rows['MemberRoleId'] == 2){ echo "Member" ;}else{ echo "Guest";};
+                                ?></a>
                                 <a href="#" class="btn btn-primary">Remove Member</a>
                             </div>
+                            
                         </div>
+                         
+                        
                     </div>
-                    <div class="col-md-4">
-                        <div class="card" style="">
-                            <img src="../assets/image/profile_image/profile_1.png" class="card-img-top" alt="...">
-                            <div class="card-body d-flex flex-column ">
-                                <h5 class="card-title">Name :</h5>
-                                <h5 class="card-title">Email :</h5>
-                                <h5 class="card-title">Number :</h5>
-                                <a href="#" class="btn btn-primary mb-2 ">Manager</a>
-                                <a href="#" class="btn btn-primary">Remove Member</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="">
-                            <img src="../assets/image/profile_image/profile_1.png" class="card-img-top" alt="...">
-                            <div class="card-body d-flex flex-column ">
-                                <h5 class="card-title">Name :</h5>
-                                <h5 class="card-title">Email :</h5>
-                                <h5 class="card-title">Number :</h5>
-                                <a href="#" class="btn btn-primary mb-2 ">Manager</a>
-                                <a href="#" class="btn btn-primary">Remove Member</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="">
-                            <img src="../assets/image/profile_image/profile_1.png" class="card-img-top" alt="...">
-                            <div class="card-body d-flex flex-column ">
-                                <h5 class="card-title">Name :</h5>
-                                <h5 class="card-title">Email :</h5>
-                                <h5 class="card-title">Number :</h5>
-                                <a href="#" class="btn btn-primary mb-2 ">Manager</a>
-                                <a href="#" class="btn btn-primary">Remove Member</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="">
-                            <img src="../assets/image/profile_image/profile_1.png" class="card-img-top" alt="...">
-                            <div class="card-body d-flex flex-column ">
-                                <h5 class="card-title">Name :</h5>
-                                <h5 class="card-title">Email :</h5>
-                                <h5 class="card-title">Number :</h5>
-                                <a href="#" class="btn btn-primary mb-2 ">Manager</a>
-                                <a href="#" class="btn btn-primary">Remove Member</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                             }
+                                  }
+                        ?>
                </div>
             </div>
       </div>
