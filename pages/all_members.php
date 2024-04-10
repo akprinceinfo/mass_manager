@@ -33,14 +33,17 @@
                     <?php 
                         $gets = mysqli_query($conn, "SELECT * FROM massmember");
                         $count_row = mysqli_num_rows($gets);
-                    ?>
-                    <?php
-                            if($count_row > 0){
+                        if($count_row > 0){
                             while($rows = mysqli_fetch_assoc($gets)){
-                        ?>
+                    ?>
                     <div class="col-md-4">
                         <div class="card d-flex " style="">
-                            <img src="../assets/image/profile_image/profile_1.png" class="card-img-top" alt="...">
+
+                        <?php 
+                        //Image row check
+                            $imageName = $rows['Profile_Photo'];
+                            echo "<img src = '../assets/images/profile_Images/$imageName' class='card-img-top' alt='...' >";
+                        ?>
                             <div class="card-body d-flex flex-column ">
                                 <h5 class="card-title">Name : <?php echo $rows['MemberName'] ;?></h5>
                                 <h5 class="card-title">Email :<?php echo $rows['Email'] ;?></h5>
@@ -50,16 +53,13 @@
                                 }elseif($rows['MemberRoleId'] == 2){ echo "Member" ;}else{ echo "Guest";};
                                 ?></a>
                                 <a href="#" class="btn btn-primary">Remove Member</a>
-                            </div>
-                            
+                            </div>                       
                         </div>
-                         
-                        
                     </div>
                     <?php
-                             }
-                                  }
-                        ?>
+                        }
+                            }
+                    ?>
                </div>
             </div>
       </div>
